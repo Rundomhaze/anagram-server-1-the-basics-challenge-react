@@ -11,36 +11,35 @@
 Убедитесь, что модули, необходимые для приложения, были установлены. В командной строке запустите `npm install`.
 
 ### Release 0: Создание модели и миграций для слов
-Сначала нужно сохранить несколько слов в базе данных. Создайте базу данных с коллекцией `words` (слова) и моделью для представления слов в Mongoose.
+Сначала нужно сохранить несколько слов в базе данных. Создайте базу данных с таблицей `Words` (слова) и моделью для представления слов в Sequelize.
+Не забывайте, что есть удобный инструмент [sequelize-cli](https://sequelize.org/master/manual/migrations.html) для создания моделей.
 
 - Создайте модель `Word`.
 
 
-
 ### Release 1: Пополнение Базы данных
-В нашей базе данных есть коллекция `words`. Теперь мы добавим некоторые исходные данные в базу данных; это называется *засеять* базу данных. Данные, которыми мы будем пополнять нашу базу данных, хранятся в файле `fixtures/abridged_word_list.txt`. Нам нужно сохранить каждое слово в этом файле в виде слова в нашей базе данных. 
+В нашей базе данных есть таблица `Words`. Теперь мы добавим некоторые исходные данные в базу данных; это называется *засеять* базу данных. Данные, которыми мы будем пополнять нашу базу данных, хранятся в файле `fixtures/abridged_word_list.txt`. Нам нужно сохранить каждое слово в этом файле в виде слова в нашей базе данных. 
 
-Напишите отдельный скрипт, который будет пополнять нашу базу данных, в новом файле `seeds.js`. Нам нужно указать, как сохранить каждую строку из файла в виде объекта `Word` в базе данных.
+Воспользуйтесь [sequelize-cli](https://sequelize.org/master/manual/migrations.html#creating-the-first-seed) для создания `Seed'a`.
+Вам потребуется реализовать следующую логику: прочитать файл `fixtures/abridged_word_list.txt`, разбить его на строки, вставить полученные строки в базу данных.
+Возможно вам пригодится встроенные метод [bulkInsert](https://sequelize.org/master/class/lib/dialects/abstract/query-interface.js~QueryInterface.html#instance-method-bulkInsert)
 
-Запустите `seeds.js`:
-
+Запустите seed через sequelize-cli
 
 ### Release 2: Модель Words находит анаграммы
-Создайте подключение к базе данных в файле app.js для одновременного запуска сервера и mongoose.
+Создайте подключение к базе данных в файле app.js для одновременного запуска сервера и sequelize.
 
 Наше приложение должно найти анаграммы для данного слова. Наша модель `Word`  будет ответственна за эту функцию. Экземпляр класса `Word` вернет свои анаграммы:
 
 ```js
-wordSchema.statics.anagrams = function() {
-    return this.find(
-        // Returns a collection of Word objects that are anagrams
-        // of the instance on which the method is called.
-    );
+class Word extends Model {
+  static anagrams () {
+    return this.findAll(
+      // Returns a collection of Word objects that are anagrams
+      // of the instance on which the method is called.
+    )
   }
-
 ```
-
-Почитайте про `statics` [тут](https://mongoosejs.com/docs/guide.html#statics).
 
 
 ### Release 3: Как показать анаграммы Слова
