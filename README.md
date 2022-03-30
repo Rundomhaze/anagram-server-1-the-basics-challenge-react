@@ -22,7 +22,7 @@
 
 Воспользуйтесь [sequelize-cli](https://sequelize.org/master/manual/migrations.html#creating-the-first-seed) для создания `Seed'a`.
 Вам потребуется реализовать следующую логику: прочитать файл `fixtures/abridged_word_list.txt`, разбить его на строки, вставить полученные строки в базу данных.
-Возможно вам пригодится встроенные метод [bulkInsert](https://sequelize.org/v4/class/lib/query-interface.js~QueryInterface.html#instance-method-bulkInsert)
+Возможно вам пригодится встроенные метод [bulkInsert](https://sequelize.org/v6/class/src/dialects/abstract/query-interface.js~QueryInterface.html#instance-method-bulkInsert)
 
 Запустите seed через sequelize-cli
 
