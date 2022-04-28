@@ -1,13 +1,11 @@
 const React = require('react');
-const Footer = require('./Footer');
-const Header = require('./Header');
 
 module.exports = function Layout({ children, title }) {
   return (
-    <html>
+    <html lang="en">
       <head>
         <title>{title}</title>
-        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <link rel="stylesheet" href="/stylesheets/style.css" />
       </head>
       <body>
         {children}
