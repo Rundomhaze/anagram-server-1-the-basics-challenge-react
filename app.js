@@ -1,3 +1,5 @@
+require('@babel/register');
+
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
@@ -7,11 +9,6 @@ const usersRouter = require('./routes/users');
 
 const app = express();
 const PORT = 3000;
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jsx');
-app.engine('jsx', require('express-react-views').createEngine());
 
 app.use(logger('dev'));
 app.use(express.json());
