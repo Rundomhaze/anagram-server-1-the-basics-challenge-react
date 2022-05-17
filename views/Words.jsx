@@ -1,6 +1,6 @@
 const React = require('react');
 
-module.exports = function Home({ word }) {
+module.exports = function Words({ word }) {
   return (
     <main className="container">
       <h1>
